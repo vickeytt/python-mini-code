@@ -21,11 +21,12 @@ if __name__ == '__main__':
     p = Process(target=fun1,args=('0',)) #实例化进程对象
     p.start()
     print(p.pid)
-    keyboard.wait('enter')#等待键盘回车输入
-    Suspended_thread(p.pid)
-    print(p.pid)
+    while 1:
+        keyboard.wait('enter')#等待键盘回车输入
+        Suspended_thread(p.pid)
+        print(p.pid)
 
-    keyboard.wait('space')
-    Resume_thread(p.pid)
-    print(p.pid)
+        keyboard.wait('space')
+        Resume_thread(p.pid)
+        print(p.pid)
 
