@@ -1,0 +1,22 @@
+# -*- coding:utf-8 -*-
+#Pipe
+#通过管道来进行进程间数据的传递
+
+__author__ = "MuT6 Sch01aR"
+ 
+from multiprocessing import Process, Pipe
+ 
+def f(conn):
+    conn.send("Data_1 from Conn_1")
+    conn.send("Data_2 from Conn_1")
+    print("Conn_1: ",conn.recv())
+    conn.close()
+ 
+if __name__ == '__main__':
+    conn_1, conn_2 = Pipe() #生成管道的两边，分别传给两个进程
+    p = Process(target=f, args=(conn_1,))
+    p.start()
+    print("Conn_2: ",conn_2.recv())
+    print("Conn_2: ",conn_2.recv())
+    conn_2.send("Data_1 from Conn_2")
+    p.join()
